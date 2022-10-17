@@ -72,3 +72,11 @@ async def search(path: str, user_name: str, page: Union[int, None] = None):
 async def create_item(i: Item):
     return i.dict()
 
+
+# put 请求： 请求体 + 路径参数 + 查询参数
+@app.put("/items/{item_id}")
+async def create_item(item_id: int, i: Item, q: Union[str, None] = None):
+    result = {"item_id": item_id, **i.dict()}
+    if q:
+        result.update({"q": q})
+    return result;
